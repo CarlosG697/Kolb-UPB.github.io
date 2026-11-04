@@ -77,6 +77,9 @@ button { font:inherit; cursor:pointer; }
 .result-card ul { padding-left:19px; line-height:1.65; margin-bottom:0; }
 .chart { width:100%; max-width:520px; display:block; margin:8px auto 0; overflow:visible; }
 .chart text { font-family:var(--site-font-body); fill:light-dark(#24434b,#d7e5e8); font-size:11px; }
+.chart line:not(.axis-cross) { stroke:light-dark(#344b54,#a9bdc3); }
+.chart .axis-cross { stroke:light-dark(#168acb,#55b8ee); }
+.chart #plot-point { fill:light-dark(#07566a,#65c7c4); stroke:light-dark(#ffffff,#101d21); }
 .chart .axis-title { font-size:12px; font-weight:800; letter-spacing:.08em; }
 .chart .axis-detail { font-size:10px; font-style:italic; }
 .chart .quadrant-label { font-size:12px; text-decoration:underline; }
@@ -197,8 +200,8 @@ $("restart").addEventListener("click",()=>{answers=questions.map(()=>[null,null,
 </script>
 
 <!--sites-preview-theme:start-->
-<style data-sites-preview-theme>:root{--site-primary:#173e76 !important;--site-on-primary:#ffffff !important;--site-secondary:#4e2f88 !important;--site-on-secondary:#ffffff !important;--site-background:#e8f3fe !important;--site-on-background:#000000 !important;--site-radius-scale:0.5 !important;--site-font-body:system-ui,sans-serif !important;--site-font-heading:Georgia,serif !important}</style>
-<script type="application/json" data-sites-preview-theme>{"appearance":"custom","primary":"#173e76","secondary":"#4e2f88","background":"#e8f3fe","typography":"editorial","spacing":1,"roundness":0.5,"headingScale":1,"decorationOpacity":1}</script>
+<style data-sites-preview-theme>:root{--site-primary:light-dark(#0c274a,#173b50) !important;--site-on-primary:light-dark(#ffffff,#ffffff) !important;--site-secondary:light-dark(#d9f0ef,#263d43) !important;--site-on-secondary:light-dark(#123f49,#e4f0f2) !important;--site-background:light-dark(#f3f7f7,#101b20) !important;--site-on-background:light-dark(#17343b,#e2ecef) !important}</style>
+<script type="application/json" data-sites-preview-theme>{"appearance":"system","primary":"#0c274a","secondary":"#d9f0ef","background":"#f3f7f7","typography":"original","spacing":1,"roundness":1,"headingScale":1,"decorationOpacity":1}</script>
 <!--sites-preview-theme:end-->
 </body>
 </html>
