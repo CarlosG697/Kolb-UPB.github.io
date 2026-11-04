@@ -148,6 +148,8 @@ const profiles = {
 let answers = questions.map(()=>[null,null,null,null]);
 let current = 0;
 const $ = id => document.getElementById(id);
+// El logo se carga como archivo del proyecto para facilitar su mantenimiento en GitHub Pages.
+document.querySelector(".brand-logo").src = "images/FUNDACION-UPB.png";
 function show(section){["intro","quiz","results"].forEach(id=>$(id).classList.toggle("hidden",id!==section));window.scrollTo({top:0,behavior:"smooth"});}
 function renderQuestion(){
   const question=questions[current], values=answers[current];
