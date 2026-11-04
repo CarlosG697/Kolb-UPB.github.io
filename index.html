@@ -86,6 +86,16 @@ button { font:inherit; cursor:pointer; }
 @media (max-width:700px) { .intro-grid,.results-top,.result-grid { grid-template-columns:1fr; } h1 { font-size:32px; } .word-grid { grid-template-columns:1fr; } main { padding:18px 14px 42px; } .panel { padding:18px; } }
 @page { size:A4; margin:13mm 15mm 16mm; }
 @media print { :root { color-scheme:light; } body,#app { background:#fff !important; color:#17343b !important; } header { padding:10mm 0 7mm; background:#fff !important; color:#17343b !important; border-bottom:2px solid #0c274a; print-color-adjust:exact; -webkit-print-color-adjust:exact; } header:after { display:none; } .brand-logo { width:150px; min-height:0; padding:0; border:0; background:transparent !important; } .hero { margin:5mm 0 0; max-width:none; } .hero .eyebrow { color:#0c274a; } h1 { color:#0c274a; font-size:25px; margin:5px 0; } .hero p { color:#334a54 !important; max-width:none; font-size:10pt; line-height:1.45; } .hero .institutional-intro { margin-top:8px; padding-left:10px; border-left:3px solid #0c274a; } main { max-width:none; padding:7mm 0 0; } #intro,#quiz,.actions,.footer-note.no-print { display:none !important; } #results { display:block !important; } #results > .panel { border:0; padding:0; border-radius:0; } .panel,.profile,.result-card { box-shadow:none; break-inside:avoid; background:#fff !important; color:#17343b !important; } .profile { background:#0c274a !important; color:#fff !important; print-color-adjust:exact; -webkit-print-color-adjust:exact; } .profile h2,.profile p,.profile .tag { color:#fff !important; } .results-top { grid-template-columns:1fr 1fr; gap:8mm; } .result-grid { grid-template-columns:1fr 1fr; gap:6mm; } .result-card { border:1px solid #d5dfe3; padding:5mm; } .chart { max-width:100%; } .chart text { fill:#17343b !important; } .print-signoff { display:block; text-align:center; margin:8mm 0 5mm; padding-top:5mm; border-top:1px solid #b7c5cc; color:#17343b; line-height:1.7; break-inside:avoid; font-size:10pt; } .print-signoff strong { color:#0c274a; } .print-footer { display:flex; align-items:center; justify-content:space-between; gap:8mm; padding-top:4mm; border-top:3px solid #0c274a; color:#47575e; font-size:7.5pt; line-height:1.45; break-inside:avoid; } .print-footer .footer-brand { font-weight:800; color:#0c274a; font-size:9pt; } .print-footer .footer-web { text-align:right; } }
+@media print {
+  /* Distribución controlada del informe en exactamente dos páginas A4. */
+  #results > .panel { break-inside:auto !important; page-break-inside:auto !important; }
+  .results-top { break-inside:avoid !important; page-break-inside:avoid !important; }
+  .result-grid { break-before:page !important; page-break-before:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
+  .result-card { break-inside:avoid !important; page-break-inside:avoid !important; }
+  .print-signoff, .print-footer { break-inside:avoid !important; page-break-inside:avoid !important; }
+  .print-signoff { margin-top:5mm; padding-top:3mm; }
+  .print-footer { padding-top:3mm; }
+}
 </style>
 </head>
 <body>
