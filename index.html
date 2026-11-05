@@ -79,6 +79,12 @@ button { font:inherit; cursor:pointer; }
 .result-copy { margin-top:18px; }
 .result-copy p { margin:8px 0; }
 .result-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:18px; }
+.task-analysis { margin-top:18px; }
+.task-analysis > p { margin:4px 0 14px; }
+.task-columns { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+.task-columns h4 { margin:0 0 6px; font-size:13px; }
+.task-columns ul { margin:0; padding-left:18px; font-size:12px; line-height:1.5; }
+.task-columns li { margin:0 0 3px; }
 .result-card { padding:20px; }
 .result-card ul { padding-left:19px; line-height:1.65; margin-bottom:0; }
 .chart { width:100%; max-width:520px; display:block; margin:8px auto 0; overflow:visible; }
@@ -99,6 +105,13 @@ button { font:inherit; cursor:pointer; }
   /* Distribución controlada del informe en exactamente dos páginas A4. */
   #results > .panel { break-inside:auto !important; page-break-inside:auto !important; }
   .results-top { break-inside:avoid !important; page-break-inside:avoid !important; }
+  .task-analysis { margin-top:4mm; padding:4mm !important; break-inside:avoid !important; page-break-inside:avoid !important; }
+  .task-analysis h2 { font-size:15pt; margin-bottom:2mm; }
+  .task-analysis > p { font-size:8.5pt; margin-bottom:2mm; }
+  .task-columns { gap:5mm; }
+  .task-columns h4 { font-size:8.5pt; margin-bottom:1mm; }
+  .task-columns ul { font-size:7.5pt; line-height:1.3; }
+  .task-columns li { margin-bottom:0; }
   .result-grid { break-before:page !important; page-break-before:always !important; break-inside:avoid !important; page-break-inside:avoid !important; }
   .result-card { break-inside:avoid !important; page-break-inside:avoid !important; }
   .print-signoff, .print-footer { break-inside:avoid !important; page-break-inside:avoid !important; }
@@ -135,6 +148,7 @@ button { font:inherit; cursor:pointer; }
       <div class="profile"><div class="tag">Tu perfil predominante</div><h2 id="profile-name">—</h2><p id="profile-summary"></p><p id="participant-result" style="font-size:12px;opacity:.8"></p></div>
       <div><h2>Tus dimensiones</h2><p class="muted" style="font-size:13px">Cada dimensión reúne 10 afirmaciones y puede obtener entre 10 y 50 puntos.</p><div id="score-list" class="score-list"></div></div>
     </div>
+    <section class="panel task-analysis"><h2>¿Qué tareas suelen ajustarse a tu perfil?</h2><p class="muted" style="font-size:13px">Estas son actividades que pueden resultarte más naturales y otras que podrían representar un reto. No son límites ni capacidades fijas: pueden desarrollarse con práctica.</p><div class="task-columns"><div><h4>Tareas que suelen realizar bien</h4><ul id="task-strengths"></ul></div><div><h4>Tareas que pueden resultarles difíciles</h4><ul id="task-challenges"></ul></div></div></section>
     <div class="result-grid">
       <div class="panel result-card"><h3>Mapa de preferencias</h3><svg class="chart" viewBox="0 0 520 410" role="img" aria-label="Modelo bidimensional de Kolb. Percepción en el eje vertical, desde experiencia concreta hasta conceptualización abstracta. Procesamiento en el eje horizontal, desde experimentación activa hasta observación reflexiva."><line x1="112" y1="42" x2="112" y2="320" stroke="#344b54" stroke-width="1.2"/><line x1="112" y1="320" x2="490" y2="320" stroke="#344b54" stroke-width="1.2"/><line x1="301" y1="42" x2="301" y2="310" stroke="#168acb" stroke-width="2.5"/><line x1="140" y1="181" x2="470" y2="181" stroke="#168acb" stroke-width="2.5"/><text class="quadrant-label" x="220" y="112" text-anchor="middle">Adaptadores</text><text class="quadrant-label" x="383" y="112" text-anchor="middle">Divergentes</text><text class="quadrant-label" x="220" y="253" text-anchor="middle">Convergentes</text><text class="quadrant-label" x="383" y="253" text-anchor="middle">Asimiladores</text><text class="axis-title" x="34" y="181" text-anchor="middle" transform="rotate(-90 34 181)">P E R C E P C I Ó N</text><text class="axis-title" x="301" y="390" text-anchor="middle">P R O C E S A M I E N T O</text><text class="axis-detail" x="101" y="53" text-anchor="end">Experiencia</text><text class="axis-detail" x="101" y="67" text-anchor="end">concreta</text><text class="axis-detail" x="101" y="286" text-anchor="end">Conceptualización</text><text class="axis-detail" x="101" y="300" text-anchor="end">abstracta</text><text class="axis-detail" x="188" y="342" text-anchor="middle">Experimentación</text><text class="axis-detail" x="188" y="356" text-anchor="middle">Activa</text><text class="axis-detail" x="414" y="342" text-anchor="middle">Observación</text><text class="axis-detail" x="414" y="356" text-anchor="middle">Reflexiva</text><circle id="plot-point" cx="214" cy="147" transform="translate(87 34)" r="8" fill="#07566a" stroke="white" stroke-width="2.5"/></svg><p id="axis-values" class="muted" style="font-size:12px;text-align:center"></p></div>
       <div class="panel result-card"><h3>¿Qué significa tu resultado?</h3><p id="profile-description"></p><h3 style="margin-top:18px">Estrategias que puedes probar</h3><ul id="strategies"></ul></div>
@@ -198,6 +212,12 @@ const profiles = {
   Asimilador:{summary:"Combina la conceptualización abstracta con la observación reflexiva.",description:"Tu preferencia se orienta a organizar información, analizarla y construir explicaciones coherentes. Puedes sentirte cómodo con modelos, conceptos, lecturas y relaciones lógicas entre ideas.",strategies:["Leer, investigar y elaborar síntesis estructuradas.","Construir esquemas, modelos conceptuales y mapas de relaciones.","Comparar teorías y evidencias antes de formular conclusiones.","Explicar por escrito cómo se conectan los conceptos."]},
   Convergente:{summary:"Combina la conceptualización abstracta con la experimentación activa.",description:"Tu preferencia se orienta a utilizar ideas y modelos para resolver problemas concretos. Puedes disfrutar de aplicar conceptos, probar soluciones y evaluar su utilidad.",strategies:["Resolver problemas y ejercicios aplicados.","Diseñar prototipos, procedimientos o soluciones.","Aplicar modelos a situaciones concretas y revisar resultados.","Trabajar con objetivos, criterios y productos verificables."]}
 };
+const profileTasks = {
+  Divergente:{strengths:["Generar ideas y proponer soluciones creativas.","Participar en lluvias de ideas y actividades grupales.","Analizar situaciones desde diferentes perspectivas.","Identificar necesidades y comprender experiencias de otras personas."],challenges:["Tomar decisiones rápidas con información limitada.","Ejecutar procedimientos rígidos y repetitivos.","Trabajar exclusivamente con modelos abstractos y fórmulas.","Defender una única solución descartando otras alternativas."]},
+  Asimilador:{strengths:["Analizar datos e identificar patrones.","Elaborar informes, esquemas y modelos conceptuales.","Investigar y comprender conceptos complejos.","Organizar información y construir explicaciones lógicas."],challenges:["Improvisar soluciones sin información suficiente.","Participar en actividades prácticas sin instrucciones claras.","Tomar decisiones inmediatas bajo presión.","Aprender mediante ensayo y error sin orientación previa."]},
+  Convergente:{strengths:["Resolver problemas técnicos y encontrar soluciones.","Aplicar fórmulas, modelos y procedimientos.","Realizar ejercicios prácticos con resultados verificables.","Optimizar procesos y mejorar procedimientos."],challenges:["Participar en actividades abiertas sin objetivos definidos.","Explorar múltiples perspectivas sin buscar conclusiones.","Trabajar en actividades centradas exclusivamente en experiencias personales y emociones.","Participar en discusiones prolongadas sin llegar a decisiones."]},
+  Adaptador:{strengths:["Ejecutar actividades prácticas y desarrollar prototipos.","Resolver situaciones nuevas mediante ensayo y error.","Adaptarse a cambios y asumir nuevos retos.","Coordinar actividades y movilizar equipos hacia la acción."],challenges:["Estudiar durante largos periodos conceptos exclusivamente teóricos.","Realizar análisis extensos antes de comenzar una actividad.","Trabajar con instrucciones excesivamente detalladas y procedimientos rígidos.","Elaborar explicaciones conceptuales complejas sin aplicación inmediata."]}
+};
 let answers = questions.map(()=>null);
 let current = 0;
 const $ = id => document.getElementById(id);
@@ -222,6 +242,7 @@ function finish(){const scores=calculate();const x=scores.CA-scores.EC;const y=s
   $("score-list").innerHTML=Object.keys(scores).map(k=>`<div class="score-row"><strong>${k}</strong><div><div class="track"><span style="width:${scores[k]/50*100}%"></span></div><div class="muted" style="font-size:11px;margin-top:4px">${dimensionNames[k]}</div></div><strong>${scores[k]}</strong></div>`).join("");
   const px=301-(scores.EA-scores.OR)*3.8, py=181+(scores.CA-scores.EC)*3.1;$("plot-point").setAttribute("cx",Math.max(140,Math.min(470,px)));$("plot-point").setAttribute("cy",Math.max(42,Math.min(310,py)));$("axis-values").textContent=`Percepción (CA − EC): ${x}  |  Procesamiento (EA − OR): ${y}`;
   $("profile-description").textContent=profiles[profile].description;$ ("strategies").innerHTML=profiles[profile].strategies.map(s=>`<li>${s}</li>`).join("");
+  $("task-strengths").innerHTML=profileTasks[profile].strengths.map(s=>`<li>${s}</li>`).join("");$("task-challenges").innerHTML=profileTasks[profile].challenges.map(s=>`<li>${s}</li>`).join("");
   show("results");
 }
 $("start").addEventListener("click",()=>{current=0;show("quiz");renderQuestion();});
