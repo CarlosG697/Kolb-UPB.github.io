@@ -118,6 +118,43 @@ button { font:inherit; cursor:pointer; }
   .print-signoff { margin-top:5mm; padding-top:3mm; }
   .print-footer { padding-top:3mm; }
 }
+@media print {
+  /* Acabado editorial del informe: sobrio, cercano y alineado con la identidad institucional. */
+  @page { size:A4; margin:12mm 14mm 14mm; }
+  body { font-family:Arial, Helvetica, sans-serif !important; }
+  header { border-bottom:4px solid #20a6a0 !important; padding-top:7mm !important; padding-bottom:6mm !important; }
+  .brand { gap:10mm; }
+  .brand-logo { width:39mm !important; max-width:39mm !important; }
+  .hero { margin-top:4mm !important; }
+  .hero .eyebrow { color:#168b8b !important; font-size:8pt; letter-spacing:.16em; }
+  h1 { color:#0c274a !important; font-size:23pt !important; letter-spacing:-.035em; }
+  .hero p { color:#52656c !important; }
+  .hero .institutional-intro { border-left:3px solid #20a6a0 !important; padding:2mm 0 2mm 4mm !important; }
+  .results-top { gap:5mm !important; align-items:stretch; }
+  .profile { border-radius:3mm !important; padding:6mm !important; background:#0c274a !important; border-bottom:3px solid #20a6a0; }
+  .profile .tag { color:#9ce0d9 !important; letter-spacing:.15em; }
+  .profile h2 { font-size:22pt !important; line-height:1.08; }
+  .results-top > div:nth-child(2) { padding:2mm 0; }
+  .results-top > div:nth-child(2) h2, .task-analysis h2 { color:#0c274a !important; }
+  .score-row { grid-template-columns:11mm 1fr 9mm; gap:2mm; }
+  .track { background:#e7eeee !important; }
+  .track span { background:#20a6a0 !important; }
+  .task-analysis { border:1px solid #d6e5e3 !important; border-top:3px solid #20a6a0 !important; border-radius:3mm !important; background:#f6faf9 !important; padding:4mm 5mm !important; }
+  .task-analysis > p { color:#5b6d72 !important; }
+  .task-columns h4 { color:#0c5963 !important; }
+  .task-columns li::marker { color:#20a6a0; }
+  .result-grid { gap:5mm !important; }
+  .result-card { border:1px solid #d7e2e4 !important; border-top:3px solid #0c5963 !important; border-radius:3mm !important; padding:4mm !important; }
+  .result-card h3 { color:#0c274a !important; }
+  .chart .axis-cross { stroke:#20a6a0 !important; }
+  .chart #plot-point { fill:#0c5963 !important; }
+  .footer-note { color:#60747a !important; border-left:2px solid #20a6a0; padding-left:3mm; }
+  .print-signoff { border-top:1px solid #d7e2e4 !important; color:#53676e !important; }
+  .print-signoff strong { color:#0c5963 !important; }
+  .print-footer { border-top:3px solid #20a6a0 !important; color:#52656c !important; }
+  .print-footer .footer-brand { color:#0c274a !important; letter-spacing:.04em; }
+  .print-footer .footer-web a { color:#0c5963 !important; text-decoration:none; }
+}
 </style>
 </head>
 <body>
@@ -155,7 +192,7 @@ button { font:inherit; cursor:pointer; }
     </div>
     <p class="footer-note">Este resultado describe preferencias relativas de respuesta en este inventario; no mide inteligencia, capacidad, rendimiento ni una condición clínica. Los estilos no son categorías fijas: una persona puede combinar y desarrollar distintas formas de aprender.</p>
     <div class="print-signoff"><strong>Equipo de Proyectos y Alianzas.</strong><br>Fundación UPB, <span id="print-date">noviembre de 2026</span>.</div>
-    <div class="print-footer"><div><div class="footer-brand">Fundación UPB</div>Universidad Pontificia Bolivariana<br>EcoCampus Laureles, Medellín<br>Circular 1ra. No. 70-01, bloque 3, piso 3</div><div class="footer-web">(+57) 604 448 8388 Ext. 19000<br>fundacion@upb.edu.co<br>www.upb.edu.co/es/fundacion-universitaria</div></div>
+    <div class="print-footer"><div><div class="footer-brand">Fundación UPB</div>Universidad Pontificia Bolivariana<br>EcoCampus Laureles, Medellín<br>Circular 1ra. No. 70-01, bloque 3, piso 3</div><div class="footer-web">(+57) 604 448 8388 Ext. 19000<br>fundacion@upb.edu.co<br><a href="https://fundacionupb.org/">fundacionupb.org</a></div></div>
     <div class="actions no-print"><button class="primary" id="print">Imprimir / Guardar como PDF</button><button class="secondary" id="restart">Volver a comenzar</button></div>
   </div>
 </section>
